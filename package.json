@@ -1,0 +1,28 @@
+{
+  "name": "projeto-individual-inteli-m2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jest.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reimar-Coelho/Projeto-Individual-Inteli-M2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Reimar-Coelho/Projeto-Individual-Inteli-M2/issues"
+  },
+  "homepage": "https://github.com/Reimar-Coelho/Projeto-Individual-Inteli-M2#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
