@@ -1,28 +1,29 @@
 {
-  "name": "projeto-individual-inteli-m2",
+  "name": "2025-1b-t15-in02-g02",
   "version": "1.0.0",
-  "description": "",
-  "main": "jest.config.js",
-  "directories": {
-    "test": "tests"
-  },
+  "description": "<p align=\"center\">\r <a href= \"https://www.inteli.edu.br/\"><img src=\"/assets/inteli.png\" alt=\"Inteli - Instituto de Tecnologia e Liderança\" border=\"0\"></a>\r </p>",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Reimar-Coelho/Projeto-Individual-Inteli-M2.git"
+    "url": "git+https://github.com/Inteli-College/2025-1B-T15-IN02-G02.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/Reimar-Coelho/Projeto-Individual-Inteli-M2/issues"
+    "url": "https://github.com/Inteli-College/2025-1B-T15-IN02-G02/issues"
   },
-  "homepage": "https://github.com/Reimar-Coelho/Projeto-Individual-Inteli-M2#readme",
+  "homepage": "https://github.com/Inteli-College/2025-1B-T15-IN02-G02#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.10",
+    "pg": "^8.15.6",
+    "supertest": "^7.1.0"
   }
 }
