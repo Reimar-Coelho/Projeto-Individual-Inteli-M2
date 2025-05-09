@@ -18,7 +18,7 @@ A aplicação é construída utilizando uma arquitetura MVC (Model-View-Controll
 
 ## 3. Modelo de Dados (Diagrama do Banco de Dados)
 
-![Diagrama do Banco de Dados](../assets/bancoRelacional.png)
+![Diagrama do Banco de Dados](../assets/modelo-banco.png)
 
 **Descrição das Tabelas Principais:**
 
