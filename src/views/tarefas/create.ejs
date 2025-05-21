@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nova Tarefa</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    form { max-width: 600px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; }
+    input[type="text"], input[type="date"], textarea, select { 
+      width: 100%; padding: 8px; box-sizing: border-box; 
+    }
+    textarea { height: 100px; }
+    .nav { margin: 20px 0; }
+    .nav a { margin-right: 10px; text-decoration: none; color: #0066cc; }
+    .categories { margin-top: 15px; }
+    .category-option { margin-right: 15px; }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="/">Página Inicial</a>
+    <a href="/tarefas">Voltar para Lista</a>
+  </div>
+
+  <h1>Nova Tarefa</h1>
+  
+  <form method="post" action="/tarefas/nova">
+    <div class="form-group">
+      <label for="titulo">Título:</label>
+      <input type="text" id="titulo" name="titulo" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="descricao">Descrição:</label>
+      <textarea id="descricao" name="descricao"></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="prioridade">Prioridade:</label>
+      <select id="prioridade" name="prioridade">
+        <option value="Baixa">Baixa</option>
+        <option value="Media" selected>Média</option>
+        <option value="Alta">Alta</option>
+        <option value="Urgente">Urgente</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="status">Status:</label>
+      <select id="status" name="status">
+        <option value="pendente" selected>Pendente</option>
+        <option value="em_progresso">Em Progresso</option>
+        <option value="concluida">Concluída</option>
+        <option value="cancelada">Cancelada</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="data_vencimento">Data de Vencimento:</label>
+      <input type="date" id="data_vencimento" name="data_vencimento">
+    </div>
+    
+    <% if (typeof categorias !== 'undefined' && categorias.length > 0) { %>
+      <div class="form-group">
+        <label>Categorias:</label>
+        <div class="categories">
+          <% categorias.forEach(categoria => { %>
+            <label class="category-option">
+              <input type="checkbox" name="categorias_ids" value="<%= categoria.id %>"> <%= categoria.nome %>
+            </label>
+          <% }) %>
+        </div>
+      </div>
+    <% } %>
+    
+    <button type="submit">Criar Tarefa</button>
+  </form>
+  
+  <p>Esta é uma view de teste para a rota GET /tarefas/nova</p>
+</body>
+</html>

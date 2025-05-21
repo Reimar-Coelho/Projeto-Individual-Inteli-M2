@@ -28,8 +28,6 @@ Projeto-Individual-Inteli-M2/
 │   ├── scripts/
 │   │   ├── init.sql
 │   │   └── runSQLScript.js
-│   ├── services/
-│   │   └── exampleService.js
 │   ├── views/
 │   │   ├── components/
 │   │   │   └── header.ejs

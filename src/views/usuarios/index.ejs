@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Usuários</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    .nav { margin: 20px 0; }
+    .nav a { margin-right: 10px; text-decoration: none; color: #0066cc; }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="/">Página Inicial</a>
+    <a href="/usuarios/registro">Novo Usuário</a>
+  </div>
+
+  <h1>Lista de Usuários</h1>
+  
+  <% if (typeof usuarios !== 'undefined' && usuarios.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Data de Criação</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% usuarios.forEach(usuario => { %>
+          <tr>
+            <td><%= usuario.id %></td>
+            <td><%= usuario.nome_usuario %></td>
+            <td><%= usuario.email %></td>
+            <td><%= new Date(usuario.criado_em).toLocaleDateString() %></td>
+            <td>
+              <a href="/usuarios/perfil/<%= usuario.id %>">Ver Perfil</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>Nenhum usuário encontrado.</p>
+  <% } %>
+  
+  <p>Esta é uma view de teste para a rota GET /usuarios</p>
+</body>
+</html>

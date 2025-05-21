@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sistema de Gerenciamento de Tarefas</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #333; }
+    .nav { margin: 20px 0; }
+    .nav a { margin-right: 10px; text-decoration: none; color: #0066cc; }
+    .container { max-width: 800px; margin: 0 auto; }
+    .cta-button {
+      display: inline-block;
+      background-color: #0066cc;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .feature {
+      flex: 1;
+      min-width: 250px;
+      margin: 15px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sistema de Gerenciamento de Tarefas</h1>
+    
+    <div class="nav">
+      <% if (isLoggedIn) { %>
+        <a href="/tarefas">Minhas Tarefas</a>
+        <a href="/categorias">Categorias</a>
+        <a href="/usuarios/perfil">Meu Perfil</a>
+        <a href="/usuarios/logout">Sair</a>
+      <% } else { %>
+        <a href="/usuarios/login">Login</a>
+        <a href="/usuarios/registro">Registro</a>
+      <% } %>
+    </div>
+    
+    <% if (isLoggedIn) { %>
+      <h2>Bem-vindo, <%= usuario.nome %>!</h2>
+      <p>Gerencie suas tarefas e aumente sua produtividade.</p>
+      <a href="/tarefas" class="cta-button">Ir para Minhas Tarefas</a>
+    <% } else { %>
+      <h2>Organize suas tarefas para aumentar sua produtividade</h2>
+      <p>Faça login ou registre-se para começar a gerenciar suas tarefas.</p>
+      <a href="/usuarios/registro" class="cta-button">Registre-se Agora</a>
+    <% } %>
+    
+    <div class="features">
+      <div class="feature">
+        <h3>Organize suas Tarefas</h3>
+        <p>Crie, edite e organize suas tarefas de maneira simples e eficiente.</p>
+      </div>
+      
+      <div class="feature">
+        <h3>Categorize</h3>
+        <p>Agrupe suas tarefas em categorias personalizadas para melhor organização.</p>
+      </div>
+      
+      <div class="feature">
+        <h3>Priorize</h3>
+        <p>Defina prioridades e prazos para não perder nenhum compromisso importante.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Categorias</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    .nav { margin: 20px 0; }
+    .nav a { margin-right: 10px; text-decoration: none; color: #0066cc; }
+    form { display: inline; }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="/">Página Inicial</a>
+    <a href="/categorias/nova">Nova Categoria</a>
+    <a href="/tarefas">Tarefas</a>
+  </div>
+
+  <h1>Lista de Categorias</h1>
+  
+  <% if (typeof categorias !== 'undefined' && categorias.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% categorias.forEach(categoria => { %>
+          <tr>
+            <td><%= categoria.id %></td>
+            <td><%= categoria.nome %></td>
+            <td>
+              <a href="/categorias/<%= categoria.id %>/editar">Editar</a>
+              <form method="post" action="/categorias/<%= categoria.id %>/excluir">
+                <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta categoria?')">Excluir</button>
+              </form>
+              <a href="/tarefas/categoria/<%= categoria.id %>">Ver Tarefas</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>Nenhuma categoria encontrada.</p>
+  <% } %>
+  
+  <p>Esta é uma view de teste para a rota GET /categorias</p>
+</body>
+</html>

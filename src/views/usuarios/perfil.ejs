@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Perfil do Usuário</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .profile { max-width: 600px; }
+    .label { font-weight: bold; }
+    .nav { margin: 20px 0; }
+    .nav a { margin-right: 10px; text-decoration: none; color: #0066cc; }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="/">Página Inicial</a>
+    <a href="/usuarios">Voltar para Lista</a>
+    <a href="/usuarios/perfil/editar">Editar Perfil</a>
+  </div>
+
+  <h1>Perfil do Usuário</h1>
+  
+  <% if (typeof usuario !== 'undefined') { %>
+    <div class="profile">
+      <p><span class="label">ID:</span> <%= usuario.id %></p>
+      <p><span class="label">Nome:</span> <%= usuario.nome_usuario %></p>
+      <p><span class="label">Email:</span> <%= usuario.email %></p>
+      <p><span class="label">Cadastrado em:</span> <%= new Date(usuario.criado_em).toLocaleDateString() %></p>
+    </div>
+  <% } else { %>
+    <p>Usuário não encontrado.</p>
+  <% } %>
+  
+  <p>Esta é uma view de teste para a rota GET /usuarios/perfil/:id</p>
+</body>
+</html>
