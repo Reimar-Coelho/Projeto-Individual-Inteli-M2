@@ -19,8 +19,11 @@ app.use(session({
   }
 }));
 
-app.use(bodyParser.urlencoded({ extended: true }));
+// Configurando pasta de arquivos estáticos
 app.use(express.static('public'));
+app.use('/css', express.static(path.join(__dirname, 'src/views/css')));
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Middleware para disponibilizar dados do usuário em todas as views
