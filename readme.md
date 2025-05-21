@@ -15,38 +15,61 @@ Projeto-Individual-Inteli-M2/
 │   └── wad.md
 ├── node_modules/                
 │   └── ...
+├── public/
+│   ├── css/
+│   └── js/
 ├── src/                
 │   ├── config/
 │   │   └── db.js
 │   ├── controllers/
-│   │   └── exampleController.js
+│   │   ├── categoriaController.js
+│   │   ├── exampleController.js
+│   │   ├── subTarefaController.js
+│   │   ├── tarefaController.js
+│   │   └── usuarioController.js
+│   ├── middlewares/
+│   │   └── authMiddleware.js
 │   ├── models/
-│   │   └── exampleModel.js
+│   │   ├── categoriaModel.js
+│   │   ├── exampleModel.js
+│   │   ├── subTarefaModel.js
+│   │   ├── tarefaModel.js
+│   │   └── usuarioModel.js
 │   ├── routes/
-│   │   ├── exampleRoute.js
-│   │   └── frontRoutes.js
+│   │   ├── categoriaRoutes.js
+│   │   ├── exampleRoutes.js
+│   │   ├── frontRoutes.js
+│   │   ├── subTarefaRoutes.js
+│   │   ├── tarefaRoutes.js
+│   │   └── usuarioRoutes.js
 │   ├── scripts/
 │   │   ├── init.sql
 │   │   └── runSQLScript.js
 │   ├── views/
-│   │   ├── components/
-│   │   │   └── header.ejs
-│   │   ├── css/
-│   │   │   └── style.css
-│   │   ├── layout/
-│   │   │   └── main.ejs
-│   │   └── pages/
-│   │       └── page1.ejs
-│   ├── .gitattributes
-│   ├── app.js
-│   └── jest.config.js
+│   │   ├── categorias/
+│   │   │   ├── create.ejs
+│   │   │   ├── edit.ejs
+│   │   │   └── index.ejs
+│   │   ├── error.ejs
+│   │   ├── home.ejs
+│   │   ├── tarefas/
+│   │   │   ├── create.ejs
+│   │   │   ├── edit.ejs
+│   │   │   ├── index.ejs
+│   │   │   └── show.ejs
+│   │   └── usuarios/
+│   │       ├── editar.ejs
+│   │       ├── index.ejs
+│   │       ├── login.ejs
+│   │       ├── perfil.ejs
+│   │       └── registro.ejs
 ├── .env            
 ├── .env.example               
 ├── .gitignore              
-├── package-lock.json               
+├── package-lock.json
+├── package.json               
 ├── README.md
 └── server.js                      
-
 ```
 
 ## Modelo do Banco de Dados
@@ -80,7 +103,8 @@ Projeto-Individual-Inteli-M2/
 
 5.  **Execução da Aplicação**:
     ```bash
-    node server.js 
+    npm run init-db
+    npm run init-app
     ```
-    O servidor estará rodando em `http://localhost:3000`.
+    O servidor estará rodando em `http://localhost:5500`.
 
