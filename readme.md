@@ -10,7 +10,8 @@ Este projeto consiste na criação de uma aplicação web completa, seguindo o p
 Projeto-Individual-Inteli-M2/
 │
 ├── assets/                
-│   └── bancoRelacional.png
+│   ├── bancoRelacional.png
+│   └── diagrama.png
 ├── documentos/           
 │   └── wad.md
 ├── node_modules/                
@@ -50,15 +51,22 @@ Projeto-Individual-Inteli-M2/
 │   │   │   ├── create.ejs
 │   │   │   ├── edit.ejs
 │   │   │   └── index.ejs
+│   │   ├── components/
+│   │   │   └── header.ejs
+│   │   ├── css/
+│   │   │   └── style.css
 │   │   ├── error.ejs
 │   │   ├── home.ejs
+│   │   ├── layout/
+│   │   │   └── main.ejs
+│   │   ├── pages/
+│   │   │   └── page1.ejs
 │   │   ├── tarefas/
 │   │   │   ├── create.ejs
 │   │   │   ├── edit.ejs
 │   │   │   ├── index.ejs
 │   │   │   └── show.ejs
 │   │   └── usuarios/
-│   │       ├── editar.ejs
 │   │       ├── index.ejs
 │   │       ├── login.ejs
 │   │       ├── perfil.ejs
@@ -72,6 +80,27 @@ Projeto-Individual-Inteli-M2/
 └── server.js                      
 ```
 
+## Arquitetura MVC
+
+Este projeto utiliza o padrão de arquitetura Model-View-Controller (MVC), que organiza o código em três componentes principais:
+
+- **Model (Modelo)**: Responsável pela manipulação dos dados e lógica de negócios.
+- **View (Visão)**: Responsável pela apresentação dos dados ao usuário.
+- **Controller (Controlador)**: Atua como intermediário entre o Model e a View, processando as requisições do usuário.
+
+Para uma visão detalhada da arquitetura, consulte o [Documento de Arquitetura Web (WAD)](./documentos/wad.md), que inclui diagramas e explicações completas.
+
+![Diagrama de Arquitetura MVC](./assets/diagrama.png)
+
+## Funcionalidades Principais
+
+- **Gerenciamento de Usuários**: Cadastro, login, edição de perfil.
+- **Gerenciamento de Tarefas**: Criação, edição, listagem e exclusão de tarefas.
+- **Categorização**: Organização de tarefas por categorias personalizadas.
+- **Priorização**: Atribuição de níveis de prioridade às tarefas (Baixa, Média, Alta, Urgente).
+- **Subtarefas**: Divisão de tarefas complexas em subtarefas gerenciáveis.
+- **Status da Tarefa**: Acompanhamento do progresso através de estados (pendente, em progresso, concluída, cancelada).
+
 ## Modelo do Banco de Dados
 
 -   **Usuarios**: Tabela de usuários (`usuarios`). Campos como `nome_usuario`, `email`, `senha_hash`, `criado_em`.
@@ -79,6 +108,8 @@ Projeto-Individual-Inteli-M2/
 -   **Categorias**: Tabela para categorizar tarefas (`categorias`). Campos como `nome`, `usuario_id`, `criado_em`. Um usuário pode ter suas próprias categorias.
 -   **Tarefas_Categorias**: Tabela de junção para o relacionamento muitos-para-muitos entre tarefas e categorias (`tarefas_categorias`). Campos: `tarefa_id`, `categoria_id`.
 -   **Sub_Tarefas**: Tabela para subtarefas (`sub_tarefas`), vinculadas a uma tarefa principal. Campos como `tarefa_pai_id`, `titulo`, `status`, `criado_em`, `atualizado_em`.
+
+O script SQL completo para a criação do banco de dados pode ser encontrado em `src/scripts/init.sql`.
 
 ## Como Executar o Projeto Localmente
 
@@ -93,7 +124,7 @@ Projeto-Individual-Inteli-M2/
     -   PostgreSQL instalado e em execução.
 
 3.  **Configuração do Banco de Dados**:
-    -   Copie e cole o arquivo `.env.example` e renomeie ele para `.env`, caso necessário, insira suas próprias configurações de banco de dados (DB_USER, DB_HOST, DB_DATABASE, DB_PASSWORD, DB_PORT)
+    -   Copie e cole o arquivo `.env.example` e renomeie ele para `.env`
 
 4.  **Instalação das Dependências**:
     ```bash
@@ -103,8 +134,21 @@ Projeto-Individual-Inteli-M2/
 
 5.  **Execução da Aplicação**:
     ```bash
-    npm run init-db
-    npm run init-app
+    npm run init-db    # Inicializa o banco de dados com as tabelas necessárias
+    npm run init-app   # Inicia o servidor da aplicação
     ```
     O servidor estará rodando em `http://localhost:5500`.
 
+## Scripts Disponíveis
+
+- **npm run init-db**: Executa o script `src/scripts/runSQLScript.js` para criar as tabelas do banco de dados.
+- **npm run init-app**: Inicia a aplicação através do arquivo `server.js`.
+
+## Documentação Detalhada
+
+Para uma documentação mais detalhada da arquitetura, consulte o [Documento de Arquitetura Web (WAD)](./documentos/wad.md), que inclui:
+
+- Diagrama detalhado da arquitetura MVC
+- Modelo físico completo do banco de dados
+- Explicações sobre cada componente e seus relacionamentos
+- Fluxo de dados do sistema
