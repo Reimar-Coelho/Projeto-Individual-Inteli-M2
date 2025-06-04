@@ -7,20 +7,22 @@
   <style>
     <%- include('../css/style.css'); %>
   </style>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Inclui o cabeçalho como um partial -->
-  <%- include('../components/header') %>
+  <div class="page-wrapper">
+    <!-- Inclui o cabeçalho como um partial -->
+    <%- include('../components/header') %>
 
-  <main>
-    <!-- Renderiza o conteúdo da página específica -->
-    <%- include(content) %>
-  </main>
+    <main class="main-content fade-in">
+      <!-- Renderiza o conteúdo da página específica -->
+      <%- include(content) %>
+    </main>
 
-  <footer>
-    <!-- Rodapé comum aqui -->
-    <p>Rodapé da Aplicação</p>
-  </footer>
+    <footer>
+      <p>© 2025 Sistema de Gerenciamento de Tarefas - Desenvolvido com ❤️</p>
+    </footer>
+  </div>
 
   <!-- Adicione scripts JS se necessário -->
   <script src="/js/script.js"></script>

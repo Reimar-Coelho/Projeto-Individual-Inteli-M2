@@ -52,7 +52,7 @@ exports.login = async (req, res) => {
     };
     
     // Redirecionar para a página anterior ou tarefas
-    const returnTo = req.session.returnTo || '/tarefas';
+    const returnTo = req.session.returnTo || '/';
     delete req.session.returnTo;
     
     res.redirect(returnTo);

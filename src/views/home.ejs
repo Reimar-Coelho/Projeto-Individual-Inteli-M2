@@ -3,49 +3,70 @@
 <head>
   <title>Sistema de Gerenciamento de Tarefas</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h1>Sistema de Gerenciamento de Tarefas</h1>
-    
-    <div class="nav">
-      <% if (isLoggedIn) { %>
-        <a href="/tarefas">Minhas Tarefas</a>
-        <a href="/categorias">Categorias</a>
-        <a href="/usuarios/perfil">Meu Perfil</a>
-        <a href="/usuarios/logout">Sair</a>
-      <% } else { %>
-        <a href="/usuarios/login">Login</a>
-        <a href="/usuarios/registro">Registro</a>
-      <% } %>
-    </div>
-    
-    <% if (isLoggedIn) { %>
-      <h2>Bem-vindo, <%= usuario.nome %>!</h2>
-      <p>Gerencie suas tarefas e aumente sua produtividade.</p>
-      <a href="/tarefas" class="cta-button">Ir para Minhas Tarefas</a>
-    <% } else { %>
-      <h2>Organize suas tarefas para aumentar sua produtividade</h2>
-      <p>Faça login ou registre-se para começar a gerenciar suas tarefas.</p>
-      <a href="/usuarios/registro" class="cta-button">Registre-se Agora</a>
-    <% } %>
-    
-    <div class="features">
-      <div class="feature">
-        <h3>Organize suas Tarefas</h3>
-        <p>Crie, edite e organize suas tarefas de maneira simples e eficiente.</p>
+  <div class="page-wrapper">
+    <div class="container fade-in">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <h1><i class="fas fa-tasks" style="color: #667eea; margin-right: 10px;"></i>Sistema de Gerenciamento de Tarefas</h1>
       </div>
       
-      <div class="feature">
-        <h3>Categorize</h3>
-        <p>Agrupe suas tarefas em categorias personalizadas para melhor organização.</p>
+      <div class="nav" style="justify-content: center;">
+        <% if (isLoggedIn) { %>
+          <a href="/tarefas" class="h2-1"><span></span><span></span><span></span><span></span> Minhas Tarefas</a>
+          <a href="/categorias" class="h2-1"><span></span><span></span><span></span><span></span> Categorias</a>
+          <a href="/usuarios/perfil" class="h2-1"><span></span><span></span><span></span><span></span> Meu Perfil</a>
+          <a href="/usuarios/logout" class="h2-1"><span></span><span></span><span></span><span></span> Sair</a>
+        <% } else { %>
+          <a href="/usuarios/login"><span></span><span></span><span></span><span></span> Login</a>
+          <a href="/usuarios/registro"><span></span><span></span><span></span><span></span> Registro</a>
+        <% } %>
       </div>
       
-      <div class="feature">
-        <h3>Priorize</h3>
-        <p>Defina prioridades e prazos para não perder nenhum compromisso importante.</p>
+      <div style="text-align: center; margin: 40px 0;">
+        <% if (isLoggedIn) { %>
+          <h2 style="color: #667eea; margin-bottom: 15px;">Bem-vindo de volta, <%= usuario.nome %>! 👋</h2>
+          <p style="font-size: 18px; color: #f8f9fa; margin-bottom: 25px;">Gerencie suas tarefas e aumente sua produtividade.</p>
+          <a href="/tarefas" class="cta-button">
+            <i class="fas fa-arrow-right" style="margin-right: 8px;"></i>Ir para Minhas Tarefas
+          </a>
+        <% } else { %>
+          <h2 style="color: #667eea; margin-bottom: 15px;">Organize suas tarefas para aumentar sua produtividade 🚀</h2>
+          <p style="font-size: 18px; color: #f8f9fa; margin-bottom: 25px;">Faça login ou registre-se para começar a gerenciar suas tarefas de forma eficiente.</p>
+          <a href="/usuarios/registro" class="cta-button">
+            <i class="fas fa-rocket" style="margin-right: 8px;"></i>Registre-se Agora
+          </a>
+        <% } %>
+      </div>
+      
+      <div class="features">
+        <div class="feature">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <i class="fas fa-clipboard-list" style="font-size: 48px; color: #667eea;"></i>
+          </div>
+          <h3>Organize suas Tarefas</h3>
+          <p>Crie, edite e organize suas tarefas de maneira simples e eficiente. Mantenha tudo sob controle.</p>
+        </div>
+        
+        <div class="feature">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <i class="fas fa-tags" style="font-size: 48px; color: #667eea;"></i>
+          </div>
+          <h3>Categorize</h3>
+          <p>Agrupe suas tarefas em categorias personalizadas para melhor organização e visualização.</p>
+        </div>
+        
+        <div class="feature">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <i class="fas fa-star" style="font-size: 48px; color: #667eea;"></i>
+          </div>
+          <h3>Priorize</h3>
+          <p>Defina prioridades e prazos para não perder nenhum compromisso importante.</p>
+        </div>
       </div>
     </div>
   </div>
 </body>
+</html>
 </html>

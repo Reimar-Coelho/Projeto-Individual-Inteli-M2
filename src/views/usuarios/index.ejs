@@ -1,46 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lista de Usuários</title>
+  <title>Usuários</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div class="nav">
-    <a href="/">Página Inicial</a>
-    <a href="/usuarios/registro">Novo Usuário</a>
+  <div class="page-wrapper fade-in">
+    <%- include('../components/header') %>
+    
+    <div class="container">
+      <div class="page-header">
+        <h1><i class="fas fa-users"></i> Usuários</h1>
+        <div class="breadcrumb">
+          <a href="/"><i class="fas fa-home"></i> Início</a>
+          <span class="separator">></span>
+          <span class="current">Usuários</span>
+        </div>
+      </div>
+
+      <div class="page-actions">
+        <a href="/usuarios/registro" class="btn btn-primary">
+          <i class="fas fa-user-plus"></i> Novo Usuário
+        </a>
+      </div>
+
+      <% if (typeof usuarios !== 'undefined' && usuarios.length > 0) { %>
+        <div class="users-grid">
+          <% usuarios.forEach(usuario => { %>
+            <div class="user-card">
+              <div class="user-avatar">
+                <i class="fas fa-user-circle"></i>
+              </div>
+              <div class="user-info">
+                <h3><%= usuario.nome_usuario %></h3>
+                <p class="user-email"><i class="fas fa-envelope"></i> <%= usuario.email %></p>
+                <p class="user-date"><i class="fas fa-calendar"></i> Criado em: <%= new Date(usuario.criado_em).toLocaleDateString('pt-BR') %></p>
+              </div>
+              <div class="user-actions">
+                <a href="/usuarios/perfil/<%= usuario.id %>" class="btn btn-primary btn-sm">
+                  <i class="fas fa-eye"></i> Ver Perfil
+                </a>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <div class="empty-state">
+          <i class="fas fa-users"></i>
+          <h3>Nenhum usuário encontrado</h3>
+          <p>Cadastre o primeiro usuário do sistema.</p>
+          <a href="/usuarios/registro" class="btn btn-primary">
+            <i class="fas fa-user-plus"></i> Novo Usuário
+          </a>
+        </div>
+      <% } %>
+    </div>
   </div>
 
-  <h1>Lista de Usuários</h1>
-  
-  <% if (typeof usuarios !== 'undefined' && usuarios.length > 0) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Email</th>
-          <th>Data de Criação</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% usuarios.forEach(usuario => { %>
-          <tr>
-            <td><%= usuario.id %></td>
-            <td><%= usuario.nome_usuario %></td>
-            <td><%= usuario.email %></td>
-            <td><%= new Date(usuario.criado_em).toLocaleDateString() %></td>
-            <td>
-              <a href="/usuarios/perfil/<%= usuario.id %>">Ver Perfil</a>
-            </td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  <% } else { %>
-    <p>Nenhum usuário encontrado.</p>
-  <% } %>
-  
-  <p>Esta é uma view de teste para a rota GET /usuarios</p>
+  <script src="/js/script.js"></script>
 </body>
 </html>

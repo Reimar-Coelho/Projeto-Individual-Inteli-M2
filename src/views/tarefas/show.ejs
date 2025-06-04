@@ -3,85 +3,148 @@
 <head>
   <title>Detalhes da Tarefa</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div class="nav">
-    <a href="/">Página Inicial</a>
-    <a href="/tarefas">Voltar para Lista</a>
-    <a href="/tarefas/<%= typeof tarefa !== 'undefined' ? tarefa.id : '' %>/editar">Editar Tarefa</a>
-    <form style="display: inline;" method="post" action="/tarefas/<%= typeof tarefa !== 'undefined' ? tarefa.id : '' %>/excluir">
-      <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Excluir Tarefa</button>
-    </form>
+  <div class="page-wrapper fade-in">
+    <%- include('../components/header') %>
+    
+    <div class="container">
+      <% if (typeof tarefa !== 'undefined') { %>
+        <div class="page-header">
+          <h1><i class="fas fa-eye"></i> <%= tarefa.titulo %></h1>
+          <div class="breadcrumb">
+            <a href="/"><i class="fas fa-home"></i> Início</a>
+            <span class="separator">></span>
+            <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
+            <span class="separator">></span>
+            <span class="current"><%= tarefa.titulo %></span>
+          </div>
+        </div>
+
+        <div class="task-detail-card">
+          <div class="task-detail-header">
+            <div class="task-status-badges">
+              <span class="badge status-<%= tarefa.status %>">
+                <% if (tarefa.status === 'pendente') { %>
+                  <i class="fas fa-clock"></i>
+                <% } else if (tarefa.status === 'em_progresso') { %>
+                  <i class="fas fa-play"></i>
+                <% } else if (tarefa.status === 'concluida') { %>
+                  <i class="fas fa-check"></i>
+                <% } else { %>
+                  <i class="fas fa-times"></i>
+                <% } %>
+                <%= tarefa.status.replace('_', ' ').toUpperCase() %>
+              </span>
+              <span class="badge priority priority-<%= tarefa.prioridade.toLowerCase() %>">
+                <i class="fas fa-flag"></i>
+                <%= tarefa.prioridade %>
+              </span>
+            </div>
+            <div class="task-actions">
+              <a href="/tarefas/<%= tarefa.id %>/editar" class="btn btn-primary btn-sm">
+                <i class="fas fa-edit"></i> Editar
+              </a>
+              <form style="display: inline;margin-bottom: 0;box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);" method="post" action="/tarefas/<%= tarefa.id %>/excluir">
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">
+                  <i class="fas fa-trash"></i> Excluir
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="task-detail-content">
+            <div class="detail-item">
+              <span class="detail-label"><i class="fas fa-align-left"></i> Descrição:</span>
+              <span class="detail-value"><%= tarefa.descricao || 'Sem descrição' %></span>
+            </div>
+            
+            <div class="detail-item">
+              <span class="detail-label"><i class="fas fa-calendar-alt"></i> Data de Vencimento:</span>
+              <span class="detail-value">
+                <% if (tarefa.data_vencimento) { %>
+                  <%= new Date(tarefa.data_vencimento).toLocaleDateString('pt-BR') %>
+                <% } else { %>
+                  Não definida
+                <% } %>
+              </span>
+            </div>
+            
+            <div class="detail-item">
+              <span class="detail-label"><i class="fas fa-tags"></i> Categorias:</span>
+              <span class="detail-value">
+                <% if (tarefa.categorias_nomes && tarefa.categorias_nomes.length > 0) { %>
+                  <% tarefa.categorias_nomes.forEach(categoria => { %>
+                    <span class="category-tag"><%= categoria %></span>
+                  <% }) %>
+                <% } else { %>
+                  Sem categorias
+                <% } %>
+              </span>
+            </div>
+          </div>
+        </div>        
+        <div class="subtasks-section">
+          <div class="section-header">
+            <h2><i class="fas fa-list-ul"></i> Sub-tarefas</h2>
+          </div>
+          
+          <% if (typeof subTarefas !== 'undefined' && subTarefas.length > 0) { %>
+            <div class="subtasks-grid">
+              <% subTarefas.forEach(subTarefa => { %>
+                <div class="subtask-card">
+                  <div class="subtask-header">
+                    <h4><%= subTarefa.titulo %></h4>
+                    <span class="badge status-<%= subTarefa.status %>">
+                      <%= subTarefa.status.replace('_', ' ').toUpperCase() %>
+                    </span>
+                  </div>
+                  <div class="subtask-actions">
+                    <form style="display: inline;margin-bottom: 0;box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);" method="post" action="/tarefas/<%= tarefa.id %>/subtarefas/<%= subTarefa.id %>/status">
+                      <select name="status" onchange="this.form.submit()" class="status-select">
+                        <option value="pendente" <%= subTarefa.status === 'pendente' ? 'selected' : '' %>>Pendente</option>
+                        <option value="em_progresso" <%= subTarefa.status === 'em_progresso' ? 'selected' : '' %>>Em Progresso</option>
+                        <option value="concluida" <%= subTarefa.status === 'concluida' ? 'selected' : '' %>>Concluída</option>
+                      </select>
+                    </form>
+                    <form style="display: inline;margin-bottom: 0;box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);" method="post" action="/tarefas/<%= tarefa.id %>/subtarefas/<%= subTarefa.id %>/excluir">
+                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir esta sub-tarefa?')">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          <% } else { %>
+            <div class="empty-state">
+              <i class="fas fa-list"></i>
+              <p>Nenhuma sub-tarefa encontrada.</p>
+            </div>
+          <% } %>
+          
+          <div class="add-subtask-form">
+            <h3><i class="fas fa-plus"></i> Adicionar Sub-tarefa</h3>
+            <form method="post" action="/tarefas/<%= tarefa.id %>/subtarefas" class="subtask-form">
+              <div class="form-group">
+                <input type="text" id="titulo" name="titulo" placeholder="Digite o título da sub-tarefa" required>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-plus"></i> Adicionar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      <% } else { %>
+        <div class="alert alert-error">
+          <i class="fas fa-exclamation-triangle"></i>
+          <span>Tarefa não encontrada.</span>
+        </div>
+      <% } %>
+    </div>
   </div>
 
-  <h1>Detalhes da Tarefa</h1>
-  
-  <% if (typeof tarefa !== 'undefined') { %>
-    <div class="task-details">
-      <p><span class="label">Título:</span> <%= tarefa.titulo %></p>
-      <p><span class="label">Descrição:</span> <%= tarefa.descricao || 'Sem descrição' %></p>
-      <p><span class="label">Status:</span> <%= tarefa.status %></p>
-      <p><span class="label">Prioridade:</span> <%= tarefa.prioridade %></p>
-      <p><span class="label">Data de Vencimento:</span> <%= tarefa.data_vencimento ? new Date(tarefa.data_vencimento).toLocaleDateString() : 'N/A' %></p>
-      <p><span class="label">Categorias:</span> 
-        <% if (tarefa.categorias_nomes && tarefa.categorias_nomes.length > 0) { %>
-          <%= tarefa.categorias_nomes.join(', ') %>
-        <% } else { %>
-          Sem categorias
-        <% } %>
-      </p>
-    </div>
-    
-    <div class="subtasks">
-      <h2>Sub-tarefas</h2>
-      
-      <% if (typeof subTarefas !== 'undefined' && subTarefas.length > 0) { %>
-        <table>
-          <thead>
-            <tr>
-              <th>Título</th>
-              <th>Status</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% subTarefas.forEach(subTarefa => { %>
-              <tr>
-                <td><%= subTarefa.titulo %></td>
-                <td><%= subTarefa.status %></td>
-                <td>
-                  <form style="display: inline;" method="post" action="/tarefas/<%= tarefa.id %>/subtarefas/<%= subTarefa.id %>/status">
-                    <select name="status" onchange="this.form.submit()">
-                      <option value="pendente" <%= subTarefa.status === 'pendente' ? 'selected' : '' %>>Pendente</option>
-                      <option value="em_progresso" <%= subTarefa.status === 'em_progresso' ? 'selected' : '' %>>Em Progresso</option>
-                      <option value="concluida" <%= subTarefa.status === 'concluida' ? 'selected' : '' %>>Concluída</option>
-                    </select>
-                  </form>
-                  <form style="display: inline;" method="post" action="/tarefas/<%= tarefa.id %>/subtarefas/<%= subTarefa.id %>/excluir">
-                    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta sub-tarefa?')">Excluir</button>
-                  </form>
-                </td>
-              </tr>
-            <% }) %>
-          </tbody>
-        </table>
-      <% } else { %>
-        <p>Nenhuma sub-tarefa encontrada.</p>
-      <% } %>
-      
-      <form method="post" action="/tarefas/<%= tarefa.id %>/subtarefas">
-        <h3>Adicionar Sub-tarefa</h3>
-        <div class="form-group">
-          <label for="titulo">Título:</label>
-          <input type="text" id="titulo" name="titulo" required>
-        </div>
-        <button type="submit">Adicionar</button>
-      </form>
-    </div>
-  <% } else { %>
-    <p>Tarefa não encontrada.</p>
-  <% } %>
-  
-  <p>Esta é uma view de teste para a rota GET /tarefas/:id</p>
+  <script src="/js/script.js"></script>
 </body>
 </html>

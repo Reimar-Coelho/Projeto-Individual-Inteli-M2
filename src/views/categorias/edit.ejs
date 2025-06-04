@@ -3,28 +3,51 @@
 <head>
   <title>Editar Categoria</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div class="nav">
-    <a href="/">Página Inicial</a>
-    <a href="/categorias">Voltar para Lista</a>
+  <div class="page-wrapper fade-in">
+    <%- include('../components/header') %>
+    
+    <div class="container">
+      <div class="page-header">
+        <h1><i class="fas fa-edit"></i> Editar Categoria</h1>
+        <div class="breadcrumb">
+          <a href="/"><i class="fas fa-home"></i> Início</a>
+          <span class="separator">></span>
+          <a href="/categorias"><i class="fas fa-tags"></i> Categorias</a>
+          <span class="separator">></span>
+          <span class="current">Editar</span>
+        </div>
+      </div>
+
+      <% if (typeof categoria !== 'undefined') { %>
+        <div class="form-card">
+          <form method="post" action="/categorias/<%= categoria.id %>/editar" class="category-form">
+            <div class="form-group">
+              <label for="nome"><i class="fas fa-tag"></i> Nome da Categoria:</label>
+              <input type="text" id="nome" name="nome" value="<%= categoria.nome %>" required placeholder="Digite o nome da categoria">
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Atualizar Categoria
+              </button>
+              <a href="/categorias" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancelar
+              </a>
+            </div>
+          </form>
+        </div>
+      <% } else { %>
+        <div class="alert alert-error">
+          <i class="fas fa-exclamation-triangle"></i>
+          <span>Categoria não encontrada.</span>
+        </div>
+      <% } %>
+    </div>
   </div>
 
-  <h1>Editar Categoria</h1>
-  
-  <% if (typeof categoria !== 'undefined') { %>
-    <form method="post" action="/categorias/<%= categoria.id %>/editar">
-      <div class="form-group">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" value="<%= categoria.nome %>" required>
-      </div>
-      
-      <button type="submit">Atualizar Categoria</button>
-    </form>
-  <% } else { %>
-    <p>Categoria não encontrada.</p>
-  <% } %>
-  
-  <p>Esta é uma view de teste para a rota GET /categorias/:id/editar</p>
+  <script src="/js/script.js"></script>
 </body>
 </html>

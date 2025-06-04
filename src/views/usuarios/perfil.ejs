@@ -1,29 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Perfil do Usuário</title>
+  <title>Meu Perfil - Sistema de Tarefas</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="nav">
-    <a href="/">Página Inicial</a>
-    <a href="/usuarios">Voltar para Lista</a>
-    <a href="/usuarios/perfil/editar">Editar Perfil</a>
-  </div>
+  <div class="page-wrapper">
+    <div class="container fade-in">
+      <div class="nav">
+        <a href="/"><i class="fas fa-home"></i> Página Inicial</a>
+        <a href="/tarefas"><i class="fas fa-list"></i> Minhas Tarefas</a>
+        <a href="/usuarios/perfil/editar"><i class="fas fa-edit"></i> Editar Perfil</a>
+      </div>
 
-  <h1>Perfil do Usuário</h1>
-  
-  <% if (typeof usuario !== 'undefined') { %>
-    <div class="profile">
-      <p><span class="label">ID:</span> <%= usuario.id %></p>
-      <p><span class="label">Nome:</span> <%= usuario.nome_usuario %></p>
-      <p><span class="label">Email:</span> <%= usuario.email %></p>
-      <p><span class="label">Cadastrado em:</span> <%= new Date(usuario.criado_em).toLocaleDateString() %></p>
+      <h1><i class="fas fa-user" style="margin-right: 10px; color: #667eea;"></i>Meu Perfil</h1>
+      
+      <% if (typeof usuario !== 'undefined') { %>
+        <div class="profile">
+          <div class="profile-header">
+            <div class="profile-avatar">
+              <%= usuario.nome_usuario.charAt(0).toUpperCase() %>
+            </div>
+            <h2><%= usuario.nome_usuario %></h2>
+          </div>
+          
+          <div class="task-info">
+            <div class="task-info-item">
+              <div class="label"><i class="fas fa-id-badge" style="margin-right: 8px;"></i>ID do Usuário</div>
+              <p><%= usuario.id %></p>
+            </div>
+            
+            <div class="task-info-item">
+              <div class="label"><i class="fas fa-user" style="margin-right: 8px;"></i>Nome de Usuário</div>
+              <p><%= usuario.nome_usuario %></p>
+            </div>
+            
+            <div class="task-info-item">
+              <div class="label"><i class="fas fa-envelope" style="margin-right: 8px;"></i>Email</div>
+              <p><%= usuario.email %></p>
+            </div>
+            
+            <div class="task-info-item">
+              <div class="label"><i class="fas fa-calendar-alt" style="margin-right: 8px;"></i>Membro desde</div>
+              <p><%= new Date(usuario.criado_em).toLocaleDateString('pt-BR') %></p>
+            </div>
+          </div>
+        </div>
+      <% } else { %>
+        <div class="card">
+          <p><i class="fas fa-exclamation-triangle" style="margin-right: 8px; color: #e74c3c;"></i>Usuário não encontrado.</p>
+        </div>
+      <% } %>
     </div>
-  <% } else { %>
-    <p>Usuário não encontrado.</p>
-  <% } %>
-  
-  <p>Esta é uma view de teste para a rota GET /usuarios/perfil/:id</p>
+  </div>
 </body>
 </html>

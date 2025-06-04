@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Tarefas</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="nav">
+    <a href="/">Página Inicial</a>
+    <a href="/tarefas/nova">Nova Tarefa</a>
+  </div>
+
+  <h1>Lista de Tarefas</h1>
+  
+  <!-- Filtros -->
+  <div class="filter">
+    <p>Filtrar por status:</p>
+    <a href="/tarefas">Todos</a>
+    <a href="/tarefas/status/pendente">Pendentes</a>
+    <a href="/tarefas/status/em_progresso">Em Progresso</a>
+    <a href="/tarefas/status/concluida">Concluídas</a>
+    <a href="/tarefas/status/cancelada">Canceladas</a>
+    
+    <% if (typeof categorias !== 'undefined' && categorias.length > 0) { %>
+      <p>Filtrar por categoria:</p>
+      <% categorias.forEach(categoria => { %>
+        <a href="/tarefas/categoria/<%= categoria.id %>"><%= categoria.nome %></a>
+      <% }) %>
+    <% } %>
+  </div>
+  
+  <% if (typeof tarefas !== 'undefined' && tarefas.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Status</th>
+          <th>Prioridade</th>
+          <th>Data de Vencimento</th>
+          <th>Categorias</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% tarefas.forEach(tarefa => { %>
+          <tr>
+            <td><%= tarefa.titulo %></td>
+            <td><%= tarefa.status %></td>
+            <td><%= tarefa.prioridade %></td>
+            <td><%= tarefa.data_vencimento ? new Date(tarefa.data_vencimento).toLocaleDateString() : 'N/A' %></td>
+            <td>
+              <% if (tarefa.categorias_nomes && tarefa.categorias_nomes.length > 0) { %>
+                <%= tarefa.categorias_nomes.join(', ') %>
+              <% } else { %>
+                -
+              <% } %>
+            </td>
+            <td>
+              <a href="/tarefas/<%= tarefa.id %>">Detalhes</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>Nenhuma tarefa encontrada.</p>
+  <% } %>
+  
+  <p>Esta é uma view de teste para a rota GET /tarefas</p>
+</body>
+</html>

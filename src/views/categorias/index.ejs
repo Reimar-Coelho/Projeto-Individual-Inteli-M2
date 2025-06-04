@@ -1,47 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lista de Categorias</title>
+  <title>Categorias</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div class="nav">
-    <a href="/">Página Inicial</a>
-    <a href="/categorias/nova">Nova Categoria</a>
-    <a href="/tarefas">Tarefas</a>
+  <div class="page-wrapper fade-in">
+    <%- include('../components/header') %>
+    
+    <div class="container">
+      <div class="page-header">
+        <h1><i class="fas fa-tags"></i> Categorias</h1>
+        <div class="breadcrumb">
+          <a href="/"><i class="fas fa-home"></i> Início</a>
+          <span class="separator">></span>
+          <span class="current">Categorias</span>
+        </div>
+      </div>
+
+      <div class="page-actions">
+        <a href="/categorias/nova" class="btn btn-primary">
+          <i class="fas fa-plus"></i> Nova Categoria
+        </a>
+      </div>
+
+      <% if (typeof categorias !== 'undefined' && categorias.length > 0) { %>
+        <div class="categories-grid">
+          <% categorias.forEach(categoria => { %>
+            <div class="category-card">
+              <div class="category-header">
+                <h3><i class="fas fa-tag"></i> <%= categoria.nome %></h3>
+                <span class="category-id">#<%= categoria.id %></span>
+              </div>
+              <div class="category-actions">
+                <a href="/categorias/<%= categoria.id %>/editar" class="btn btn-secondary btn-sm">
+                  <i class="fas fa-edit"></i> Editar
+                </a>
+                <a href="/tarefas/categoria/<%= categoria.id %>" class="btn btn-info btn-sm">
+                  <i class="fas fa-eye"></i> Ver Tarefas
+                </a>
+                <form style="display: inline;margin-bottom: 0;box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);" method="post" action="/categorias/<%= categoria.id %>/excluir">
+                  <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir esta categoria?')">
+                    <i class="fas fa-trash"></i> Excluir
+                  </button>
+                </form>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <div class="empty-state">
+          <i class="fas fa-tags"></i>
+          <h3>Nenhuma categoria encontrada</h3>
+          <p>Crie sua primeira categoria para organizar suas tarefas.</p>
+          <a href="/categorias/nova" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Nova Categoria
+          </a>
+        </div>
+      <% } %>
+    </div>
   </div>
 
-  <h1>Lista de Categorias</h1>
-  
-  <% if (typeof categorias !== 'undefined' && categorias.length > 0) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% categorias.forEach(categoria => { %>
-          <tr>
-            <td><%= categoria.id %></td>
-            <td><%= categoria.nome %></td>
-            <td>
-              <a href="/categorias/<%= categoria.id %>/editar">Editar</a>
-              <form method="post" action="/categorias/<%= categoria.id %>/excluir">
-                <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta categoria?')">Excluir</button>
-              </form>
-              <a href="/tarefas/categoria/<%= categoria.id %>">Ver Tarefas</a>
-            </td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  <% } else { %>
-    <p>Nenhuma categoria encontrada.</p>
-  <% } %>
-  
-  <p>Esta é uma view de teste para a rota GET /categorias</p>
+  <script src="/js/script.js"></script>
 </body>
 </html>
