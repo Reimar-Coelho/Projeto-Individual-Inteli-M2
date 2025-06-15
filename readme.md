@@ -124,7 +124,7 @@ O script SQL completo para a criação do banco de dados pode ser encontrado em 
     -   PostgreSQL instalado e em execução.
 
 3.  **Configuração do Banco de Dados**:
-    -   Copie e cole o arquivo `.env.example` e renomeie ele para `.env`
+    -   Copie e cole o arquivo `.env.example` e renomeie ele para `.env`. O arquivo `.env` contém as variáveis de ambiente necessárias para a configuração do banco de dados, você pode usar as variáveis de ambiente do seu próprio banco de dados PostgreSQL para rodar a aplicação ou usar as de exemplo que já estão disponíveis no `.env.example`.
 
 4.  **Instalação das Dependências**:
     ```bash
