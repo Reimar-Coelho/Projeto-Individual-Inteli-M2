@@ -111,6 +111,9 @@ Para uma visão detalhada da arquitetura, consulte o [Documento de Arquitetura W
 
 O script SQL completo para a criação do banco de dados pode ser encontrado em `src/scripts/init.sql`.
 
+## Link do vídeo de demonstração
+Para ver o vídeo de demonstração deste projeto, acesse este link: [clique aqui](https://drive.google.com/file/d/1pSZgkHzbF10MGSvgMCvqxdGAKEI1OHzu/view?usp=sharing)
+
 ## Como Executar o Projeto Localmente
 
 1.  **Clone do projeto**:
